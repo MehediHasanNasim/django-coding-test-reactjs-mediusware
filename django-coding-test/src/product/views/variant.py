@@ -4,6 +4,15 @@ from django.views.generic import ListView, CreateView, UpdateView
 from product.forms import VariantForm
 from product.models import Variant
 
+''' Nasim '''
+from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework import generics
+from product.serializers import *
+from product.models import *
+from urllib import request
+
+
 
 class BaseVariantView(generic.View):
     form_class = VariantForm
@@ -39,3 +48,18 @@ class VariantCreateView(BaseVariantView, CreateView):
 
 class VariantEditView(BaseVariantView, UpdateView):
     pk_url_kwarg = 'id'
+
+
+
+'''creating api view from nasim '''
+class VariantListCreate(generics.ListCreateAPIView):
+    '''create customer and view list'''
+    serializer_class = VariantSerializer
+    queryset = Variant.objects.all()
+
+class VariantDetailsview(generics.RetrieveUpdateAPIView):
+    '''retrieve data with pk'''
+    '''update data with put method'''
+    '''dele method will delete data with pk'''
+    serializer_class = VariantSerializer
+    queryset = Variant.objects.all()
